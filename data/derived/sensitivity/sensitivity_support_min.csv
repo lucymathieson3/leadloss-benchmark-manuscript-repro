@@ -1,0 +1,106 @@
+param,param_label,value,is_default,case,true_ages,n_peaks,peak_ages_str,n_recovered,n_true,n_covered,recovered_str,covered_str
+support_min,Minimum support (f_support),0.05,,1A,700,1,701,1,1,1,700,700
+support_min,Minimum support (f_support),0.1,*,1A,700,1,701,1,1,1,700,700
+support_min,Minimum support (f_support),0.15,,1A,700,1,701,1,1,1,700,700
+support_min,Minimum support (f_support),0.2,,1A,700,1,701,1,1,1,700,700
+support_min,Minimum support (f_support),0.3,,1A,700,1,701,1,1,1,700,700
+support_min,Minimum support (f_support),0.05,,1B,700,1,697,1,1,1,700,700
+support_min,Minimum support (f_support),0.1,*,1B,700,1,697,1,1,1,700,700
+support_min,Minimum support (f_support),0.15,,1B,700,1,697,1,1,1,700,700
+support_min,Minimum support (f_support),0.2,,1B,700,1,697,1,1,1,700,700
+support_min,Minimum support (f_support),0.3,,1B,700,1,697,1,1,1,700,700
+support_min,Minimum support (f_support),0.05,,1C,700,1,681,1,1,0,700,
+support_min,Minimum support (f_support),0.1,*,1C,700,1,681,1,1,0,700,
+support_min,Minimum support (f_support),0.15,,1C,700,1,681,1,1,0,700,
+support_min,Minimum support (f_support),0.2,,1C,700,1,681,1,1,0,700,
+support_min,Minimum support (f_support),0.3,,1C,700,1,681,1,1,0,700,
+support_min,Minimum support (f_support),0.05,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+support_min,Minimum support (f_support),0.1,*,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+support_min,Minimum support (f_support),0.15,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+support_min,Minimum support (f_support),0.2,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+support_min,Minimum support (f_support),0.3,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+support_min,Minimum support (f_support),0.05,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+support_min,Minimum support (f_support),0.1,*,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+support_min,Minimum support (f_support),0.15,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+support_min,Minimum support (f_support),0.2,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+support_min,Minimum support (f_support),0.3,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+support_min,Minimum support (f_support),0.05,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+support_min,Minimum support (f_support),0.1,*,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+support_min,Minimum support (f_support),0.15,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+support_min,Minimum support (f_support),0.2,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+support_min,Minimum support (f_support),0.3,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+support_min,Minimum support (f_support),0.05,,3A,400,1,402,1,1,1,400,400
+support_min,Minimum support (f_support),0.1,*,3A,400,1,402,1,1,1,400,400
+support_min,Minimum support (f_support),0.15,,3A,400,1,402,1,1,1,400,400
+support_min,Minimum support (f_support),0.2,,3A,400,1,402,1,1,1,400,400
+support_min,Minimum support (f_support),0.3,,3A,400,1,402,1,1,1,400,400
+support_min,Minimum support (f_support),0.05,,3B,400,1,403,1,1,1,400,400
+support_min,Minimum support (f_support),0.1,*,3B,400,1,403,1,1,1,400,400
+support_min,Minimum support (f_support),0.15,,3B,400,1,403,1,1,1,400,400
+support_min,Minimum support (f_support),0.2,,3B,400,1,403,1,1,1,400,400
+support_min,Minimum support (f_support),0.3,,3B,400,1,403,1,1,1,400,400
+support_min,Minimum support (f_support),0.05,,3C,400,1,399,1,1,1,400,400
+support_min,Minimum support (f_support),0.1,*,3C,400,1,399,1,1,1,400,400
+support_min,Minimum support (f_support),0.15,,3C,400,1,399,1,1,1,400,400
+support_min,Minimum support (f_support),0.2,,3C,400,1,399,1,1,1,400,400
+support_min,Minimum support (f_support),0.3,,3C,400,1,399,1,1,1,400,400
+support_min,Minimum support (f_support),0.05,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.1,*,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.15,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.2,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.3,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.05,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+support_min,Minimum support (f_support),0.1,*,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+support_min,Minimum support (f_support),0.15,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+support_min,Minimum support (f_support),0.2,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+support_min,Minimum support (f_support),0.3,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+support_min,Minimum support (f_support),0.05,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.1,*,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.15,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.2,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.3,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+support_min,Minimum support (f_support),0.05,,5A,"500, 1500",1,1494,1,2,0,1500,
+support_min,Minimum support (f_support),0.1,*,5A,"500, 1500",1,1494,1,2,0,1500,
+support_min,Minimum support (f_support),0.15,,5A,"500, 1500",1,1494,1,2,0,1500,
+support_min,Minimum support (f_support),0.2,,5A,"500, 1500",1,1494,1,2,0,1500,
+support_min,Minimum support (f_support),0.3,,5A,"500, 1500",1,1494,1,2,0,1500,
+support_min,Minimum support (f_support),0.05,,5B,"500, 1500",1,1475,1,2,0,1500,
+support_min,Minimum support (f_support),0.1,*,5B,"500, 1500",1,1475,1,2,0,1500,
+support_min,Minimum support (f_support),0.15,,5B,"500, 1500",1,1475,1,2,0,1500,
+support_min,Minimum support (f_support),0.2,,5B,"500, 1500",1,1475,1,2,0,1500,
+support_min,Minimum support (f_support),0.3,,5B,"500, 1500",1,1475,1,2,0,1500,
+support_min,Minimum support (f_support),0.05,,5C,"500, 1500",1,1437,1,2,0,1500,
+support_min,Minimum support (f_support),0.1,*,5C,"500, 1500",1,1437,1,2,0,1500,
+support_min,Minimum support (f_support),0.15,,5C,"500, 1500",1,1437,1,2,0,1500,
+support_min,Minimum support (f_support),0.2,,5C,"500, 1500",1,1437,1,2,0,1500,
+support_min,Minimum support (f_support),0.3,,5C,"500, 1500",1,1437,1,2,0,1500,
+support_min,Minimum support (f_support),0.05,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.1,*,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.15,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.2,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.3,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.05,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.1,*,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.15,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.2,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.3,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.05,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.1,*,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.15,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.2,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.3,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+support_min,Minimum support (f_support),0.05,,7A,"500, 1500",1,1483,1,2,0,1500,
+support_min,Minimum support (f_support),0.1,*,7A,"500, 1500",1,1483,1,2,0,1500,
+support_min,Minimum support (f_support),0.15,,7A,"500, 1500",1,1483,1,2,0,1500,
+support_min,Minimum support (f_support),0.2,,7A,"500, 1500",1,1483,1,2,0,1500,
+support_min,Minimum support (f_support),0.3,,7A,"500, 1500",1,1483,1,2,0,1500,
+support_min,Minimum support (f_support),0.05,,7B,"500, 1500",1,1457,1,2,0,1500,
+support_min,Minimum support (f_support),0.1,*,7B,"500, 1500",1,1457,1,2,0,1500,
+support_min,Minimum support (f_support),0.15,,7B,"500, 1500",1,1457,1,2,0,1500,
+support_min,Minimum support (f_support),0.2,,7B,"500, 1500",1,1457,1,2,0,1500,
+support_min,Minimum support (f_support),0.3,,7B,"500, 1500",1,1457,1,2,0,1500,
+support_min,Minimum support (f_support),0.05,,7C,"500, 1500",1,1473,1,2,0,1500,
+support_min,Minimum support (f_support),0.1,*,7C,"500, 1500",1,1473,1,2,0,1500,
+support_min,Minimum support (f_support),0.15,,7C,"500, 1500",1,1473,1,2,0,1500,
+support_min,Minimum support (f_support),0.2,,7C,"500, 1500",1,1473,1,2,0,1500,
+support_min,Minimum support (f_support),0.3,,7C,"500, 1500",1,1473,1,2,0,1500,

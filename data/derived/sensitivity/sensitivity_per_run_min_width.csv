@@ -1,0 +1,106 @@
+param,param_label,value,is_default,case,true_ages,n_peaks,peak_ages_str,n_recovered,n_true,n_covered,recovered_str,covered_str
+per_run_min_width,Per-run min peak width (nodes),2,,1A,700,1,701,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),3,*,1A,700,1,701,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),4,,1A,700,1,700,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),5,,1A,700,0,,0,1,0,,
+per_run_min_width,Per-run min peak width (nodes),7,,1A,700,0,,0,1,0,,
+per_run_min_width,Per-run min peak width (nodes),2,,1B,700,1,697,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),3,*,1B,700,1,697,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),4,,1B,700,1,697,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),5,,1B,700,1,697,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),7,,1B,700,1,697,1,1,1,700,700
+per_run_min_width,Per-run min peak width (nodes),2,,1C,700,1,681,1,1,0,700,
+per_run_min_width,Per-run min peak width (nodes),3,*,1C,700,1,681,1,1,0,700,
+per_run_min_width,Per-run min peak width (nodes),4,,1C,700,1,681,1,1,0,700,
+per_run_min_width,Per-run min peak width (nodes),5,,1C,700,1,681,1,1,0,700,
+per_run_min_width,Per-run min peak width (nodes),7,,1C,700,1,681,1,1,0,700,
+per_run_min_width,Per-run min peak width (nodes),2,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),3,*,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),4,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),5,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),7,,2A,"300, 1800",2,"383, 1790",2,2,1,"300, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),2,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+per_run_min_width,Per-run min peak width (nodes),3,*,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+per_run_min_width,Per-run min peak width (nodes),4,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+per_run_min_width,Per-run min peak width (nodes),5,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+per_run_min_width,Per-run min peak width (nodes),7,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+per_run_min_width,Per-run min peak width (nodes),2,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+per_run_min_width,Per-run min peak width (nodes),3,*,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+per_run_min_width,Per-run min peak width (nodes),4,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+per_run_min_width,Per-run min peak width (nodes),5,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+per_run_min_width,Per-run min peak width (nodes),7,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+per_run_min_width,Per-run min peak width (nodes),2,,3A,400,1,402,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),3,*,3A,400,1,402,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),4,,3A,400,1,402,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),5,,3A,400,1,402,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),7,,3A,400,1,402,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),2,,3B,400,1,403,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),3,*,3B,400,1,403,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),4,,3B,400,1,403,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),5,,3B,400,1,403,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),7,,3B,400,1,403,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),2,,3C,400,1,399,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),3,*,3C,400,1,399,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),4,,3C,400,1,399,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),5,,3C,400,1,399,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),7,,3C,400,1,399,1,1,1,400,400
+per_run_min_width,Per-run min peak width (nodes),2,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),3,*,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),4,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),5,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),7,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),2,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),3,*,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),4,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),5,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),7,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+per_run_min_width,Per-run min peak width (nodes),2,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),3,*,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),4,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),5,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),7,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+per_run_min_width,Per-run min peak width (nodes),2,,5A,"500, 1500",1,1494,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),3,*,5A,"500, 1500",1,1494,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),4,,5A,"500, 1500",1,1494,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),5,,5A,"500, 1500",1,1494,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),7,,5A,"500, 1500",1,1492,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),2,,5B,"500, 1500",1,1475,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),3,*,5B,"500, 1500",1,1475,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),4,,5B,"500, 1500",1,1475,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),5,,5B,"500, 1500",1,1475,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),7,,5B,"500, 1500",1,1475,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),2,,5C,"500, 1500",1,1437,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),3,*,5C,"500, 1500",1,1437,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),4,,5C,"500, 1500",1,1437,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),5,,5C,"500, 1500",1,1437,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),7,,5C,"500, 1500",1,1437,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),2,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),3,*,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),4,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),5,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),7,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),2,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),3,*,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),4,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),5,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),7,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),2,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),3,*,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),4,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),5,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),7,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+per_run_min_width,Per-run min peak width (nodes),2,,7A,"500, 1500",1,1483,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),3,*,7A,"500, 1500",1,1483,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),4,,7A,"500, 1500",1,1483,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),5,,7A,"500, 1500",1,1483,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),7,,7A,"500, 1500",1,1483,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),2,,7B,"500, 1500",1,1457,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),3,*,7B,"500, 1500",1,1457,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),4,,7B,"500, 1500",1,1457,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),5,,7B,"500, 1500",1,1457,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),7,,7B,"500, 1500",1,1457,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),2,,7C,"500, 1500",1,1473,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),3,*,7C,"500, 1500",1,1473,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),4,,7C,"500, 1500",1,1473,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),5,,7C,"500, 1500",1,1473,1,2,0,1500,
+per_run_min_width,Per-run min peak width (nodes),7,,7C,"500, 1500",1,1473,1,2,0,1500,

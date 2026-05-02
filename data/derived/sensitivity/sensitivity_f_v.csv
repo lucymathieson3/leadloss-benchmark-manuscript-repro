@@ -1,0 +1,106 @@
+param,param_label,value,is_default,case,true_ages,n_peaks,peak_ages_str,n_recovered,n_true,n_covered,recovered_str,covered_str
+f_v,Valley merge depth (f_v),0.2,,1A,700,1,701,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.35,,1A,700,1,701,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.5,*,1A,700,1,701,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.65,,1A,700,1,701,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.8,,1A,700,1,701,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.2,,1B,700,1,697,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.35,,1B,700,1,697,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.5,*,1B,700,1,697,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.65,,1B,700,1,697,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.8,,1B,700,1,697,1,1,1,700,700
+f_v,Valley merge depth (f_v),0.2,,1C,700,1,681,1,1,0,700,
+f_v,Valley merge depth (f_v),0.35,,1C,700,1,681,1,1,0,700,
+f_v,Valley merge depth (f_v),0.5,*,1C,700,1,681,1,1,0,700,
+f_v,Valley merge depth (f_v),0.65,,1C,700,1,681,1,1,0,700,
+f_v,Valley merge depth (f_v),0.8,,1C,700,1,681,1,1,0,700,
+f_v,Valley merge depth (f_v),0.2,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+f_v,Valley merge depth (f_v),0.35,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+f_v,Valley merge depth (f_v),0.5,*,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+f_v,Valley merge depth (f_v),0.65,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+f_v,Valley merge depth (f_v),0.8,,2A,"300, 1800",2,"383, 1791",2,2,1,"300, 1800",1800
+f_v,Valley merge depth (f_v),0.2,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+f_v,Valley merge depth (f_v),0.35,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+f_v,Valley merge depth (f_v),0.5,*,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+f_v,Valley merge depth (f_v),0.65,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+f_v,Valley merge depth (f_v),0.8,,2B,"300, 1800",2,"423, 1784",1,2,0,1800,
+f_v,Valley merge depth (f_v),0.2,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+f_v,Valley merge depth (f_v),0.35,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+f_v,Valley merge depth (f_v),0.5,*,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+f_v,Valley merge depth (f_v),0.65,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+f_v,Valley merge depth (f_v),0.8,,2C,"300, 1800",2,"433, 1797",1,2,1,1800,1800
+f_v,Valley merge depth (f_v),0.2,,3A,400,1,402,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.35,,3A,400,1,402,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.5,*,3A,400,1,402,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.65,,3A,400,1,402,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.8,,3A,400,1,402,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.2,,3B,400,1,403,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.35,,3B,400,1,403,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.5,*,3B,400,1,403,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.65,,3B,400,1,403,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.8,,3B,400,1,403,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.2,,3C,400,1,399,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.35,,3C,400,1,399,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.5,*,3C,400,1,399,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.65,,3C,400,1,399,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.8,,3C,400,1,399,1,1,1,400,400
+f_v,Valley merge depth (f_v),0.2,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.35,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.5,*,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.65,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.8,,4A,"500, 1800",2,"553, 1827",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.2,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+f_v,Valley merge depth (f_v),0.35,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+f_v,Valley merge depth (f_v),0.5,*,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+f_v,Valley merge depth (f_v),0.65,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+f_v,Valley merge depth (f_v),0.8,,4B,"500, 1800",2,"574, 1798",2,2,1,"500, 1800",1800
+f_v,Valley merge depth (f_v),0.2,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.35,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.5,*,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.65,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.8,,4C,"500, 1800",2,"604, 1737",2,2,0,"500, 1800",
+f_v,Valley merge depth (f_v),0.2,,5A,"500, 1500",1,1494,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.35,,5A,"500, 1500",1,1494,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.5,*,5A,"500, 1500",1,1494,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.65,,5A,"500, 1500",1,1494,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.8,,5A,"500, 1500",1,1494,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.2,,5B,"500, 1500",1,1475,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.35,,5B,"500, 1500",1,1475,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.5,*,5B,"500, 1500",1,1475,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.65,,5B,"500, 1500",1,1475,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.8,,5B,"500, 1500",1,1475,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.2,,5C,"500, 1500",1,1437,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.35,,5C,"500, 1500",1,1437,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.5,*,5C,"500, 1500",1,1437,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.65,,5C,"500, 1500",1,1437,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.8,,5C,"500, 1500",1,1437,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.2,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.35,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.5,*,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.65,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.8,,6A,"500, 1500",2,"518, 1485",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.2,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.35,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.5,*,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.65,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.8,,6B,"500, 1500",2,"525, 1478",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.2,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.35,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.5,*,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.65,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.8,,6C,"500, 1500",2,"599, 1403",2,2,0,"500, 1500",
+f_v,Valley merge depth (f_v),0.2,,7A,"500, 1500",1,1483,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.35,,7A,"500, 1500",1,1483,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.5,*,7A,"500, 1500",1,1483,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.65,,7A,"500, 1500",1,1483,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.8,,7A,"500, 1500",1,1483,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.2,,7B,"500, 1500",1,1457,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.35,,7B,"500, 1500",1,1457,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.5,*,7B,"500, 1500",1,1457,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.65,,7B,"500, 1500",1,1457,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.8,,7B,"500, 1500",1,1457,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.2,,7C,"500, 1500",1,1473,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.35,,7C,"500, 1500",1,1473,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.5,*,7C,"500, 1500",1,1473,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.65,,7C,"500, 1500",1,1473,1,2,0,1500,
+f_v,Valley merge depth (f_v),0.8,,7C,"500, 1500",1,1473,1,2,0,1500,

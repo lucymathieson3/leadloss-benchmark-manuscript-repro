@@ -1,0 +1,10 @@
+tier,method,n_assigned,mae,max_abs,coverage
+A,CDC,6,18,83,50
+A,DD,4,71,81,0
+A,DD-PEAKS,4,71,81,0
+B,CDC,5,3,74,67
+B,DD,4,76,81,0
+B,DD-PEAKS,4,76,81,0
+C,CDC,5,19,104,50
+C,DD,4,76,81,0
+C,DD-PEAKS,4,76,81,0

@@ -1,0 +1,58 @@
+# Open These First
+
+If you are opening this archive for the first time, start with these files in
+order:
+
+1. `01_All_Input_Tables.xlsx`
+   Input tables with explicit headers, uncertainty conventions,
+   and field definitions that are not included in the raw csv files.
+2. `02_Manuscript_Tables.xlsx`
+   Final manuscript tables, with a `Definitions` sheet.
+3. `03_Data_Set_S1_Case_Study.xlsx`
+   Case-study regional cooling ages, Warakurna ages, event bands, and source
+   references.
+4. `04_Table_S1_Sensitivity.xlsx`
+   Workbook version of Supporting Information Table S1.
+
+Final manuscript figures are in:
+
+- `05_Final_Manuscript_Figures/`
+
+Machine-readable CSV inputs used by the scripts are in:
+
+- `data/inputs/.../machine_readable_csv/`
+
+Original per-panel DD input files (`1a.csv` to `7c.csv`) are kept separately in:
+
+- `data/inputs/synthetic_cases1to7/per_case_dd_inputs_original_format/`
+
+These are the case-by-case input files used by the original DD R workflow.
+The combined `synthetic_*_DD.csv` files combine the same DD inputs for
+multiple panels into single tables.
+
+Archived derived outputs used by the figure and table scripts are in:
+
+- `data/derived/`
+
+CSV and TeX table exports are in:
+
+- `06_Table_Exports/`
+
+Reproduction scripts are in:
+
+- `scripts/`
+
+To rerun the archived scripts:
+
+```bash
+pip install -r requirements.txt
+python scripts/run_all.py --clean
+```
+
+Regenerated outputs are written to:
+
+- `outputs/figures/`
+- `outputs/tables/`
+
+The rerun does not overwrite the final manuscript figures or the workbook files
+listed above.

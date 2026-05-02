@@ -1,0 +1,368 @@
+#!/usr/bin/env python3
+"""tables_10_12_runtime_tables.py
+
+Generate manuscript **Tables 9–11** (runtime tables) from the runtime logs
+shipped with the repository.
+
+Tables
+------
+- Table 9: CDC runtime by tier (R=200; ngrid=200)
+- Table 10: DD runtime by tier (nboot=200)
+- Table 11: Runtime comparison between CDC and DD (Speedup = DD/CDC)
+
+Inputs (defaults)
+-----------------
+Expected in:
+  <paper>/data/derived/
+    ensemble_v2_anchor_noclust_curvature_ci_sigma1_1to2000_nodes200_mc200_final_4435064/runtime_log.csv
+    reimink_discordance_dating/runtime_log_reimink.csv
+
+You may override those locations via CLI flags:
+  --cdc-log PATH
+  --dd-log  PATH
+
+Outputs
+-------
+Writes into:
+  <paper>/outputs/tables/
+    table8_runtime_comparison.csv/.tex
+
+Dependencies
+------------
+- pandas
+- numpy
+
+Author: Lucy Mathieson 
+Date: 29/12/2025
+"""
+
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+from typing import Optional
+
+import numpy as np
+import pandas as pd
+
+import sys
+
+HERE = Path(__file__).resolve()
+SCRIPTS_DIR = HERE.parents[1]       # .../scripts
+UTIL_DIR = SCRIPTS_DIR / "_util"    # .../scripts/_util
+
+for p in (UTIL_DIR, SCRIPTS_DIR):
+    if str(p) not in sys.path:
+        sys.path.insert(0, str(p))
+
+from paper_io import parse_paper_args  # noqa: E402
+
+
+# -------------------- rounding + formatting helpers --------------------
+
+def _round_half_away_from_zero(x: float) -> int:
+    """Deterministic 'paper-style' rounding: .5 rounds away from zero."""
+    x = float(x)
+    if x >= 0:
+        return int((x + 0.5) // 1)
+    return -int(((-x) + 0.5) // 1)
+
+
+def _fmt_int(x) -> str:
+    return "" if pd.isna(x) else f"{_round_half_away_from_zero(float(x))}"
+
+
+def _fmt_2dp(x) -> str:
+    return "" if pd.isna(x) else f"{float(x):.2f}"
+
+
+# -------------------- log parsing --------------------
+
+def _read_csv(path: Path) -> pd.DataFrame:
+    df = pd.read_csv(path)
+    df.columns = [str(c).strip().lower() for c in df.columns]
+    return df
+
+
+def _pick_elapsed_col(df: pd.DataFrame) -> str:
+    for c in ("elapsed_s", "elapsed_sec", "elapsed", "seconds", "runtime_s"):
+        if c in df.columns:
+            return c
+    raise ValueError(f"No elapsed-time column found. Got columns: {list(df.columns)}")
+
+
+def _ensure_tier(df: pd.DataFrame) -> pd.DataFrame:
+    d = df.copy()
+    if "tier" in d.columns:
+        d["tier"] = d["tier"].astype(str).str.strip().str.upper()
+    elif "sample" in d.columns:
+        d["tier"] = d["sample"].astype(str).str.extract(r"([A-Za-z])$", expand=False).str.upper()
+    return d
+
+
+def _extract_case_from_sample(sample: pd.Series) -> pd.Series:
+    return sample.astype(str).str.extract(r"^(\d+)", expand=False)
+
+
+def summarise_cdc_runtime(df: pd.DataFrame, *, r_default: int = 200) -> pd.DataFrame:
+    """Return a Table-9-like dataframe from a CDC runtime log."""
+    if "method" not in df.columns or "phase" not in df.columns:
+        raise ValueError("CDC runtime log must contain 'method' and 'phase' columns.")
+
+    d = _ensure_tier(df)
+    elapsed_col = _pick_elapsed_col(d)
+
+    d["method"] = d["method"].astype(str).str.upper()
+    d["phase"] = d["phase"].astype(str).str.lower()
+    if "sample" in d.columns:
+        d["case"] = _extract_case_from_sample(d["sample"])
+
+    # Prefer explicit end-to-end rows; otherwise attempt to treat any 'e2e'/'total' phase as E2E.
+    e2e = d[(d["method"] == "CDC") & (d["phase"].str.contains("e2e|total|overall", regex=True))].copy()
+
+    if e2e.empty:
+        # As a fallback, if the log already appears to be one-row-per-run with CDC entries,
+        # treat all CDC rows as E2E.
+        e2e = d[d["method"] == "CDC"].copy()
+
+    # Manuscript Tables 10–12 report Cases 1–7 only; Case 8 is a faster
+    # abstention-only boundary case and is excluded from runtime summaries.
+    if "case" in e2e.columns:
+        e2e = e2e[e2e["case"] != "8"].copy()
+
+    e2e[elapsed_col] = pd.to_numeric(e2e[elapsed_col], errors="coerce")
+
+    # Determine R per row if present, otherwise use default.
+    if "r" in e2e.columns:
+        r = pd.to_numeric(e2e["r"], errors="coerce").fillna(r_default)
+    else:
+        r = pd.Series([r_default] * len(e2e), index=e2e.index)
+
+    e2e["per_run_s"] = e2e[elapsed_col] / r
+
+    rows = []
+    for tier in ("A", "B", "C"):
+        sub = e2e[e2e["tier"] == tier]
+        if sub.empty:
+            continue
+        rows.append(
+            {
+                "Tier": tier,
+                "End-to-end median (s)": float(np.nanmedian(sub[elapsed_col])),
+                "Min (s)": float(np.nanmin(sub[elapsed_col])),
+                "Max (s)": float(np.nanmax(sub[elapsed_col])),
+                "Per-run median (s)": float(np.nanmedian(sub["per_run_s"])),
+            }
+        )
+
+    out = pd.DataFrame(rows).sort_values("Tier")
+    return out
+
+
+def summarise_dd_runtime(df: pd.DataFrame, *, nboot_default: int = 200) -> pd.DataFrame:
+    """Return a Table-11-like dataframe from a DD runtime log.
+
+    Supports two common shapes:
+      1) One row per run with an elapsed-time column and a tier.
+      2) Step-based logs with 'step' and 'elapsed_sec' per step, including 'script_end'.
+    """
+    d = _ensure_tier(df)
+
+    # Case 1: already summarised per run
+    if "step" not in d.columns:
+        elapsed_col = _pick_elapsed_col(d)
+        d[elapsed_col] = pd.to_numeric(d[elapsed_col], errors="coerce")
+        if "nboot" in d.columns:
+            nboot = pd.to_numeric(d["nboot"], errors="coerce").fillna(nboot_default)
+        else:
+            nboot = pd.Series([nboot_default] * len(d), index=d.index)
+        d["per_boot_s"] = d[elapsed_col] / nboot
+
+        rows = []
+        for tier in ("A", "B", "C"):
+            sub = d[d["tier"] == tier]
+            if sub.empty:
+                continue
+            rows.append(
+                {
+                    "Tier": tier,
+                    "End-to-end median (s)": float(np.nanmedian(sub[elapsed_col])),
+                    "Min (s)": float(np.nanmin(sub[elapsed_col])),
+                    "Max (s)": float(np.nanmax(sub[elapsed_col])),
+                    "Per-bootstrap median (s)": float(np.nanmedian(sub["per_boot_s"])),
+                }
+            )
+        return pd.DataFrame(rows).sort_values("Tier")
+
+    # Case 2: step-based
+    required = {"case", "sample", "tier", "step"}
+    if not required.issubset(set(d.columns)):
+        raise ValueError(f"DD runtime log must contain at least {sorted(required)}. Got {list(d.columns)}")
+
+    elapsed_col = _pick_elapsed_col(d)
+    d[elapsed_col] = pd.to_numeric(d[elapsed_col], errors="coerce")
+
+    # Identify individual script runs
+    if "timestamp" in d.columns:
+        d["timestamp"] = pd.to_datetime(d["timestamp"], errors="coerce")
+        d = d.sort_values(["case", "sample", "timestamp"])
+
+    d["run_id"] = d["step"].astype(str).eq("script_start").groupby([d["case"], d["sample"]]).cumsum()
+    d = d[d["run_id"] > 0]
+
+    # End-to-end rows
+    e2e = d[d["step"].astype(str).eq("script_end")].copy()
+    if e2e.empty:
+        raise ValueError("DD runtime log has 'step' column but no 'script_end' rows.")
+
+    # Manuscript summaries exclude obvious stray script_end timings that do not
+    # represent the typical 200-bootstrap DD runtime for a dataset.
+    e2e = e2e[(e2e[elapsed_col] >= 1000) & (e2e[elapsed_col] <= 20000)].copy()
+    if e2e.empty:
+        raise ValueError("DD runtime log has no script_end rows within the accepted runtime range (1000–20000 s).")
+
+    # Per-boot estimate: either from explicit bootstrap_* step timings, or fall back to E2E/nboot.
+    boot = d[d["step"].astype(str).str.startswith("bootstrap_")].copy()
+
+    if not boot.empty:
+        per_boot_run = (
+            boot.groupby(["case", "sample", "run_id"])[elapsed_col]
+            .median()
+            .reset_index(name="per_boot_median_s")
+        )
+        e2e = e2e.merge(per_boot_run, on=["case", "sample", "run_id"], how="left")
+    else:
+        # If boot steps not present, compute per-boot from E2E duration.
+        nboot_default_series = pd.Series([nboot_default] * len(e2e), index=e2e.index)
+        if "nboot" in e2e.columns:
+            nboot_series = pd.to_numeric(e2e["nboot"], errors="coerce").fillna(nboot_default)
+        else:
+            nboot_series = nboot_default_series
+        e2e["per_boot_median_s"] = e2e[elapsed_col] / nboot_series
+
+    rows = []
+    for tier in ("A", "B", "C"):
+        sub = e2e[e2e["tier"] == tier]
+        if sub.empty:
+            continue
+        rows.append(
+            {
+                "Tier": tier,
+                "End-to-end median (s)": float(np.nanmedian(sub[elapsed_col])),
+                "Min (s)": float(np.nanmin(sub[elapsed_col])),
+                "Max (s)": float(np.nanmax(sub[elapsed_col])),
+                "Per-bootstrap median (s)": float(np.nanmedian(sub["per_boot_median_s"])),
+            }
+        )
+
+    return pd.DataFrame(rows).sort_values("Tier")
+
+
+def make_table12(t10: pd.DataFrame, t11: pd.DataFrame) -> pd.DataFrame:
+    m = pd.merge(
+        t10[["Tier", "End-to-end median (s)", "Per-run median (s)"]],
+        t11[["Tier", "End-to-end median (s)", "Per-bootstrap median (s)"]],
+        on="Tier",
+        suffixes=("_cdc", "_dd"),
+        how="inner",
+    )
+
+    m = m.rename(
+        columns={
+            "End-to-end median (s)_cdc": "CDC E2E median (s)",
+            "End-to-end median (s)_dd": "DD E2E median (s)",
+            "Per-run median (s)": "CDC per-run (s)",
+            "Per-bootstrap median (s)": "DD per-boot (s)",
+        }
+    )
+
+    m["Speedup (\u00d7)"] = m["DD E2E median (s)"] / m["CDC E2E median (s)"]
+
+    # Manuscript uses an Overall row. Here we take the mean across tiers as a simple summary.
+    overall = pd.DataFrame(
+        [
+            {
+                "Tier": "Overall\N{DAGGER}",
+                "CDC E2E median (s)": float(np.nanmean(m["CDC E2E median (s)"])),
+                "DD E2E median (s)": float(np.nanmean(m["DD E2E median (s)"])),
+                "CDC per-run (s)": float(np.nanmean(m["CDC per-run (s)"])),
+                "DD per-boot (s)": float(np.nanmean(m["DD per-boot (s)"])),
+                "Speedup (\u00d7)": float(np.nanmean(m["Speedup (\u00d7)"])),
+            }
+        ]
+    )
+
+    return pd.concat([m, overall], ignore_index=True)
+
+
+# -------------------- LaTeX formatting --------------------
+
+def latex_table10(df: pd.DataFrame) -> str:
+    d = df.copy()
+    d["End-to-end median (s)"] = d["End-to-end median (s)"].map(_fmt_int)
+    d["Min (s)"] = d["Min (s)"].map(_fmt_int)
+    d["Max (s)"] = d["Max (s)"].map(_fmt_int)
+    d["Per-run median (s)"] = d["Per-run median (s)"].map(_fmt_2dp)
+    return d.to_latex(index=False, escape=False)
+
+
+def latex_table11(df: pd.DataFrame) -> str:
+    d = df.copy()
+    d["End-to-end median (s)"] = d["End-to-end median (s)"].map(_fmt_int)
+    d["Min (s)"] = d["Min (s)"].map(_fmt_int)
+    d["Max (s)"] = d["Max (s)"].map(_fmt_int)
+    d["Per-bootstrap median (s)"] = d["Per-bootstrap median (s)"].map(_fmt_int)
+    return d.to_latex(index=False, escape=False)
+
+
+def latex_table12(df: pd.DataFrame) -> str:
+    d = df.copy()
+    d["CDC E2E median (s)"] = d["CDC E2E median (s)"].map(_fmt_int)
+    d["DD E2E median (s)"] = d["DD E2E median (s)"].map(_fmt_int)
+    d["CDC per-run (s)"] = d["CDC per-run (s)"].map(_fmt_2dp)
+    d["DD per-boot (s)"] = d["DD per-boot (s)"].map(_fmt_int)
+    d["Speedup (\u00d7)"] = d["Speedup (\u00d7)"].map(_fmt_int)
+    return d.to_latex(index=False, escape=False)
+
+
+def main(argv: Optional[list[str]] = None) -> None:
+    base = parse_paper_args(__file__)
+
+    ap = argparse.ArgumentParser(description="Generate manuscript Tables 10–12 (runtime tables).")
+    ap.add_argument("--cdc-log", type=str, default=None, help="Path to CDC runtime log CSV (optional).")
+    ap.add_argument("--dd-log", type=str, default=None, help="Path to DD runtime log CSV (optional).")
+    ap.add_argument("--out-subdir", type=str, default="tables", help="Output subdirectory under papers/2025-peak-picking/outputs/.")
+    args = ap.parse_args(argv)
+
+    out_dir = Path(base.out_dir) / args.out_subdir
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    derived_dir = Path(base.data_dir) / "derived"
+    default_cdc = derived_dir / "runtime_provenance" / "raw_logs" / "cdc_runtime_log_cases1to7_plus_case8.csv"
+    default_dd = derived_dir / "runtime_provenance" / "raw_logs" / "dd_runtime_log_reimink.csv"
+
+    cdc_path = Path(args.cdc_log).expanduser() if args.cdc_log else default_cdc
+    dd_path = Path(args.dd_log).expanduser() if args.dd_log else default_dd
+
+    if not cdc_path.exists():
+        raise FileNotFoundError(f"CDC runtime log not found: {cdc_path}")
+    if not dd_path.exists():
+        raise FileNotFoundError(f"DD runtime log not found: {dd_path}")
+
+    print(f"[runtime] reading CDC log: {cdc_path}")
+    print(f"[runtime] reading  DD log: {dd_path}")
+    cdc_tbl = summarise_cdc_runtime(_read_csv(cdc_path))
+    dd_tbl = summarise_dd_runtime(_read_csv(dd_path))
+    t12 = make_table12(cdc_tbl, dd_tbl)
+
+    # --- write outputs ---
+
+
+    t12.to_csv(out_dir / "table8_runtime_comparison.csv", index=False)
+    (out_dir / "table8_runtime_comparison.tex").write_text(latex_table12(t12), encoding="utf-8")
+
+    print(f"[runtime] wrote: {out_dir / 'table8_runtime_comparison.csv'}")
+
+
+if __name__ == "__main__":
+    main()

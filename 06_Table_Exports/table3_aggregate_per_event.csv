@@ -1,0 +1,4 @@
+method,n_assigned,mae,coverage
+CDC,27,19,47
+DD,16,71,8
+DD-PEAKS,22,71,17

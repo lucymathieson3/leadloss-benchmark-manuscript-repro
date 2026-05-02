@@ -1,0 +1,43 @@
+{
+  "sample": "193435",
+  "settings": {
+    "discordance": "error_ellipse",
+    "discordance_ellipse_sigmas": 2,
+    "rim_age_window_ma": [1.0, 1500.0],
+    "rim_ages_sampled": 150,
+    "monte_carlo_runs": 200,
+    "dissimilarity": "kolmogorov_smirnov",
+    "penalise_invalid_ages": true
+  },
+  "concordant_n": 14,
+  "discordant_n": 17,
+  "single_optimum": {
+    "optimal_pb_loss_age_ma": 1107.6,
+    "stability_bounds_ma": [453.72, 1248.5]
+  },
+  "ks_means": {
+    "D": 0.30047,
+    "p": 0.43866,
+    "invalid_ages": 0.765,
+    "score": 0.33275
+  },
+  "ensemble_status": "resolved",
+  "ensemble_catalogue": [
+    {
+      "rank": 1,
+      "age_ma": 453.72,
+      "stability_low_ma": 443.66,
+      "stability_high_ma": 483.90,
+      "direct_support_pct": 96,
+      "winner_support_pct": 24
+    },
+    {
+      "rank": 2,
+      "age_ma": 1112.67,
+      "stability_low_ma": 825.95,
+      "stability_high_ma": 1254.78,
+      "direct_support_pct": 88,
+      "winner_support_pct": 73
+    }
+  ]
+}
