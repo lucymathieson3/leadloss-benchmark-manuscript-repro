@@ -31,6 +31,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+from matplotlib.lines import Line2D
+from matplotlib.patches import Patch
 
 
 # manuscript house-style
@@ -54,8 +56,10 @@ mpl.rcParams.update(
     }
 )
 
-CI_COLOR = "skyblue"
-TRUE_COLOR = "crimson"
+CI_COLOR = "#9fd3f6"
+TRUE_COLOR = "0.55"
+REPORTED_COLOR = "0.55"
+ENVELOPE_COLOR = "0.85"
 
 
 # synthetic truth (Ma)
@@ -158,13 +162,14 @@ def _draw_ci_band(ax, med: float, lo: float, hi: float, *, alpha: float = 0.18) 
     ax.axvspan(lo, hi, ymin=0.0, ymax=1.0, facecolor=CI_COLOR, alpha=alpha, edgecolor="none", zorder=0)
     ax.text(
         med,
-        1.02,
-        f"{med:.0f} Ma",
+        0.965,
+        f"{med:.0f}",
         transform=ax.get_xaxis_transform(),
         ha="center",
-        va="bottom",
+        va="top",
         fontsize=7,
         color="k",
+        bbox=dict(facecolor="white", edgecolor="none", alpha=0.7, boxstyle="round,pad=0.18"),
         clip_on=False,
         zorder=5,
     )
@@ -214,7 +219,7 @@ def plot_dd_grid(
 
             # background: all bootstrap curves
             for yb in boot:
-                ax.plot(x, yb, color="0.75", lw=0.4, alpha=0.6, zorder=1)
+                ax.plot(x, yb, color="0.75", lw=0.4, alpha=0.55, zorder=1)
 
             # median curve
             ax.plot(x, y_med, color="k", lw=1.5, zorder=2)
@@ -223,27 +228,23 @@ def plot_dd_grid(
             for age in TRUE_CASES.get(case, []):
                 ax.axvline(age, ls="--", lw=0.9, color=TRUE_COLOR, zorder=0)
 
+            # DD headline age: global maximum of the aggregate curve.
+            reported_age = float("nan")
+            if np.isfinite(y_med).any():
+                reported_age = float(x[int(np.nanargmax(y_med))])
+                ax.axvline(reported_age, color=REPORTED_COLOR, lw=0.9, zorder=3)
+
             # per-bootstrap maxima summary
             try:
                 x_med, lo, hi, x_max = _bootstrap_maxima_ci(x, boot)
-                # rug of per-bootstrap maxima along the top edge
-                ax.scatter(
-                    x_max,
-                    np.full_like(x_max, 1.03),
-                    marker="|",
-                    s=18,
-                    color="0.5",
-                    alpha=0.5,
-                    transform=ax.get_xaxis_transform(),
-                    zorder=3,
-                )
-                _draw_ci_band(ax, x_med, lo, hi, alpha=0.18)
+                label_age = reported_age if np.isfinite(reported_age) else x_med
+                _draw_ci_band(ax, label_age, lo, hi, alpha=0.28)
             except Exception:
                 pass
 
             # cosmetics
             if r == 0:
-                ax.set_title(f"Tier {tier.upper()}", fontsize=10, fontweight="bold")
+                ax.set_title(f"Tier {tier.upper()}", fontsize=10, fontweight="bold", pad=3)
             if c == ncols - 1:
                 ax.text(
                     1.04,
@@ -256,6 +257,15 @@ def plot_dd_grid(
                     fontsize=9,
                     fontweight="bold",
                 )
+
+            if r == 0 and c == 0:
+                handles = [
+                    Patch(facecolor=ENVELOPE_COLOR, edgecolor="none", alpha=0.7, label="95% envelope"),
+                    Line2D([0], [0], color="k", lw=1.5, label="median likelihood"),
+                    Line2D([0], [0], color=TRUE_COLOR, lw=0.9, ls="--", label="true age"),
+                    Line2D([0], [0], color=REPORTED_COLOR, lw=0.9, label="reported age"),
+                ]
+                ax.legend(handles=handles, loc="upper right", frameon=False, handlelength=1.8, borderpad=0.2)
 
             show_xlabels = r == nrows - 1
             show_ylabels = c == 0
