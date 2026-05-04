@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""fig04_fig06_dd_likelihood_grids.py
+"""fig05_fig07_dd_likelihood_grids.py
 
-Figures 4 & 6: Discordance-dating (DD; Reimink et al. 2016) likelihood grids.
+Final manuscript Figures 5 & 7: Discordance-dating (DD; Reimink et al.
+2016) likelihood grids.
 
 Each panel shows:
   • all bootstrap likelihood curves (light grey)
@@ -16,7 +17,7 @@ Reads from:
 
 Run
 ---
-  python scripts/figures/fig04_fig06_dd_likelihood_grids.py --save
+  python scripts/figures/fig05_fig07_dd_likelihood_grids.py --save
 
 """
 
@@ -33,33 +34,51 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
+from matplotlib.ticker import MultipleLocator
 
 
 # manuscript house-style
 mpl.rcParams.update(
     {
         "font.family": "serif",
-        "font.size": 10,
+        "font.size": 11,
         "mathtext.fontset": "stix",
-        "axes.labelsize": 10,
+        "axes.labelsize": 11,
         "axes.titlesize": 11,
         "axes.linewidth": 0.8,
         "xtick.direction": "in",
         "ytick.direction": "in",
         "xtick.major.size": 4,
         "ytick.major.size": 4,
-        "legend.fontsize": 8,
+        "legend.fontsize": 9,
         "lines.linewidth": 1.2,
         "savefig.dpi": 300,
         "pdf.fonttype": 42,
         "ps.fonttype": 42,
+        "svg.fonttype": "none",
     }
 )
 
-CI_COLOR = "#9fd3f6"
-TRUE_COLOR = "0.55"
-REPORTED_COLOR = "0.55"
-ENVELOPE_COLOR = "0.85"
+CI_BAND_CLR = "#56B4E9"         # Okabe-Ito sky blue – CI band
+CI_BAND_ALPHA = 0.30            # visible but not overwhelming
+TRUE_COLOR = "#888888"          # grey dashed verticals – visible but not dominant
+LABEL_CLR = "k"                 # black text labels
+LABEL_BBOX = dict(boxstyle="round,pad=0.15", facecolor="white",
+                  edgecolor="none", alpha=0.75)
+PANEL_LABEL_BBOX = dict(boxstyle="round,pad=0.12", facecolor="white",
+                        edgecolor="none", alpha=0.75)
+FIGURE_WIDTH = 7.2
+PANEL_HEIGHT = 1.95
+GRID_WSPACE = 0.14
+GRID_HSPACE = 0.10
+TICK_LABEL_SIZE = 8.5
+TITLE_SIZE = 11
+CASE_LABEL_SIZE = 10
+PANEL_LABEL_SIZE = 10
+AGE_LABEL_SIZE = 8
+MAJOR_X_TICK = 500
+MINOR_X_TICK = 250
+MAJOR_Y_TICK = 0.2
 
 
 # synthetic truth (Ma)
@@ -85,6 +104,10 @@ def _default_paper_dir() -> Path:
         if (parent / "data").is_dir() and (parent / "scripts").is_dir():
             return parent
     return cand
+
+
+def _default_output_dir() -> Path:
+    return _default_paper_dir() / "05_Final_Manuscript_Figures"
 
 
 def _load_dd_panel(dd_dir: Path, case: str, tier: str) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -158,21 +181,66 @@ def _bootstrap_maxima_ci(x_ma: np.ndarray, boot: np.ndarray) -> Tuple[float, flo
     return med, float(lo), float(hi), x_max
 
 
-def _draw_ci_band(ax, med: float, lo: float, hi: float, *, alpha: float = 0.18) -> None:
-    ax.axvspan(lo, hi, ymin=0.0, ymax=1.0, facecolor=CI_COLOR, alpha=alpha, edgecolor="none", zorder=0)
+def _draw_ci_band(ax, med: float, lo: float, hi: float, *, alpha: float = 0.15) -> None:
+    ax.axvspan(lo, hi, ymin=0.0, ymax=1.0, facecolor=CI_BAND_CLR, alpha=CI_BAND_ALPHA, edgecolor="none", zorder=0)
+    ax.axvline(med, ls="-", lw=0.6, color="k", alpha=0.50, zorder=2.5)
     ax.text(
         med,
-        0.965,
+        0.95,
         f"{med:.0f}",
         transform=ax.get_xaxis_transform(),
         ha="center",
         va="top",
-        fontsize=7,
-        color="k",
-        bbox=dict(facecolor="white", edgecolor="none", alpha=0.7, boxstyle="round,pad=0.18"),
-        clip_on=False,
-        zorder=5,
+        fontsize=AGE_LABEL_SIZE,
+        color=LABEL_CLR,
+        bbox=LABEL_BBOX,
+        clip_on=True,
+        zorder=7,
     )
+
+
+def _panel_label(index: int) -> str:
+    return f"{chr(ord('a') + index)})"
+
+
+def _add_panel_label(ax, index: int) -> None:
+    ax.text(
+        0.03,
+        0.97,
+        _panel_label(index),
+        transform=ax.transAxes,
+        ha="left",
+        va="top",
+        fontsize=PANEL_LABEL_SIZE,
+        fontweight="bold",
+        bbox=PANEL_LABEL_BBOX,
+        zorder=8,
+    )
+
+
+def _format_axes(ax, *, show_xlabels: bool, show_ylabels: bool) -> None:
+    ax.set_xlim(0, 2000)
+    ax.set_ylim(0, 1.10)
+    ax.set_autoscale_on(False)
+    ax.xaxis.set_major_locator(MultipleLocator(MAJOR_X_TICK))
+    ax.xaxis.set_minor_locator(MultipleLocator(MINOR_X_TICK))
+    ax.yaxis.set_major_locator(MultipleLocator(MAJOR_Y_TICK))
+    ax.tick_params(
+        direction="in",
+        labelsize=TICK_LABEL_SIZE,
+        pad=2,
+        labelbottom=show_xlabels,
+        labelleft=show_ylabels,
+    )
+
+
+def _legend_handles():
+    return [
+        Patch(facecolor="0.85", alpha=0.50, edgecolor="none", label="95% envelope"),
+        Line2D([0], [0], color="k", lw=1.5, label="median likelihood"),
+        Line2D([0], [0], color=TRUE_COLOR, lw=1.0, ls="--", label="true age"),
+        Line2D([0], [0], color="k", lw=0.6, alpha=0.50, label="reported age"),
+    ]
 
 
 def plot_dd_grid(
@@ -190,9 +258,10 @@ def plot_dd_grid(
     fig, axes = plt.subplots(
         nrows=nrows,
         ncols=ncols,
-        figsize=(3.2 * ncols, 3.0 * nrows),
+        figsize=(FIGURE_WIDTH, 0.55 + PANEL_HEIGHT * nrows),
         sharex=True,
         sharey=True,
+        gridspec_kw={"wspace": GRID_WSPACE, "hspace": GRID_HSPACE},
     )
 
     # ensure 2D axes
@@ -206,76 +275,64 @@ def plot_dd_grid(
     for r, case in enumerate(cases_to_plot):
         for c, tier in enumerate(TIERS):
             ax = axes[r, c]
-            ax.set_xlim(0, 2000)
-            ax.set_ylim(0, 1.10)
-            ax.set_autoscale_on(False)
+            panel_index = r * ncols + c
+            _format_axes(ax, show_xlabels=(r == nrows - 1), show_ylabels=(c == 0))
+            _add_panel_label(ax, panel_index)
 
             try:
                 x, boot, y_med = _load_dd_panel(dd_dir, case, tier)
             except FileNotFoundError as e:
-                ax.text(0.5, 0.5, f"Missing data {case}{tier}\n{e}", ha="center", va="center", transform=ax.transAxes, fontsize=8)
+                ax.text(0.5, 0.5, f"Missing data {case}{tier}\n{e}", ha="center", va="center", transform=ax.transAxes, fontsize=TICK_LABEL_SIZE)
                 ax.axis("off")
                 continue
 
-            # background: all bootstrap curves
-            for yb in boot:
-                ax.plot(x, yb, color="0.75", lw=0.4, alpha=0.55, zorder=1)
+            # 2.5–97.5 percentile envelope + median
+            y_lo = np.nanpercentile(boot, 2.5, axis=0)
+            y_hi = np.nanpercentile(boot, 97.5, axis=0)
+            ax.fill_between(x, y_lo, y_hi, color="0.85", alpha=0.50,
+                            edgecolor="none", zorder=1)
+            ax.plot(x, y_med, color="k", lw=1.5, zorder=4)
 
-            # median curve
-            ax.plot(x, y_med, color="k", lw=1.5, zorder=2)
-
-            # dashed verticals at true ages
+            # dashed verticals at true ages (grey – visible above envelope)
             for age in TRUE_CASES.get(case, []):
-                ax.axvline(age, ls="--", lw=0.9, color=TRUE_COLOR, zorder=0)
-
-            # DD headline age: global maximum of the aggregate curve.
-            reported_age = float("nan")
-            if np.isfinite(y_med).any():
-                reported_age = float(x[int(np.nanargmax(y_med))])
-                ax.axvline(reported_age, color=REPORTED_COLOR, lw=0.9, zorder=3)
+                ax.axvline(age, ls="--", lw=1.0, color=TRUE_COLOR, zorder=3)
 
             # per-bootstrap maxima summary
             try:
                 x_med, lo, hi, x_max = _bootstrap_maxima_ci(x, boot)
-                label_age = reported_age if np.isfinite(reported_age) else x_med
-                _draw_ci_band(ax, label_age, lo, hi, alpha=0.28)
+                _draw_ci_band(ax, x_med, lo, hi, alpha=0.18)
             except Exception:
                 pass
 
             # cosmetics
             if r == 0:
-                ax.set_title(f"Tier {tier.upper()}", fontsize=10, fontweight="bold", pad=3)
+                ax.set_title(f"Tier {tier.upper()}", fontsize=TITLE_SIZE, fontweight="bold")
             if c == ncols - 1:
                 ax.text(
-                    1.04,
+                    1.03,
                     0.5,
                     f"Case {case}",
                     transform=ax.transAxes,
                     rotation=-90,
                     va="center",
                     ha="left",
-                    fontsize=9,
+                    fontsize=CASE_LABEL_SIZE,
                     fontweight="bold",
                 )
 
-            if r == 0 and c == 0:
-                handles = [
-                    Patch(facecolor=ENVELOPE_COLOR, edgecolor="none", alpha=0.7, label="95% envelope"),
-                    Line2D([0], [0], color="k", lw=1.5, label="median likelihood"),
-                    Line2D([0], [0], color=TRUE_COLOR, lw=0.9, ls="--", label="true age"),
-                    Line2D([0], [0], color=REPORTED_COLOR, lw=0.9, label="reported age"),
-                ]
-                ax.legend(handles=handles, loc="upper right", frameon=False, handlelength=1.8, borderpad=0.2)
-
-            show_xlabels = r == nrows - 1
-            show_ylabels = c == 0
-            ax.tick_params(direction="in", labelsize=7, pad=2, labelbottom=show_xlabels, labelleft=show_ylabels)
-
     # axis labels
-    axes[-1, ncols // 2].set_xlabel("Lower-intercept age (Ma)", fontsize=9)
-    axes[nrows // 2, 0].set_ylabel("Normalised likelihood", fontsize=9)
+    axes[-1, ncols // 2].set_xlabel("Lower-intercept age (Ma)", fontsize=11)
+    axes[nrows // 2, 0].set_ylabel("Normalised likelihood", fontsize=11)
 
-    fig.tight_layout()
+    fig.legend(
+        handles=_legend_handles(),
+        loc="upper center",
+        ncol=4,
+        frameon=False,
+        bbox_to_anchor=(0.5, 0.995),
+        borderaxespad=0.3,
+    )
+    fig.subplots_adjust(left=0.08, right=0.97, bottom=0.09, top=0.93, wspace=GRID_WSPACE, hspace=GRID_HSPACE)
 
     if save:
         fig_dir = Path(fig_dir)
@@ -297,10 +354,11 @@ def plot_dd_grid(
 
 def _parse_args() -> argparse.Namespace:
     paper_dir = _default_paper_dir()
+    output_dir = _default_output_dir()
     dd_dir = paper_dir / "data" / "derived" / "reimink_discordance_dating"
-    fig_dir = paper_dir / "outputs" / "figures"
+    fig_dir = output_dir
 
-    ap = argparse.ArgumentParser(description="DD likelihood grids (Figures 4 & 6).")
+    ap = argparse.ArgumentParser(description="DD likelihood grids (final manuscript Figures 5 & 7).")
 
     ap.add_argument("--paper-dir", type=Path, default=paper_dir, help="Paper/repo root directory.")
     ap.add_argument("--dd-dir", type=Path, default=dd_dir, help="Directory containing DD bootstrap/aggregate CSVs.")
@@ -329,7 +387,7 @@ def main() -> None:
         dd_dir,
         cases_to_plot=["1", "2", "3", "4"],
         fig_dir=fig_dir,
-        out_stub="fig04_dd_likelihood_grid_cases1to4",
+        out_stub="f05",
         formats=formats,
         save=save,
         show=show,
@@ -339,7 +397,7 @@ def main() -> None:
         dd_dir,
         cases_to_plot=["5", "6", "7"],
         fig_dir=fig_dir,
-        out_stub="fig06_dd_likelihood_grid_cases5to7",
+        out_stub="f07",
         formats=formats,
         save=save,
         show=show,

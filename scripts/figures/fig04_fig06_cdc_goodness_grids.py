@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""fig03_fig05_cdc_goodness_grids.py
+"""fig04_fig06_cdc_goodness_grids.py
 
-Figures 3 & 5: CDC goodness-surface grids with ensemble-catalogue overlay.
+Final manuscript Figures 4 & 6: CDC goodness-surface grids with
+ensemble-catalogue overlay.
 
 Each panel can show:
   • all runs' goodness curves S(t) (grey)   [requires per-run NPZ surfaces]
@@ -23,12 +24,12 @@ Defaults (repo-relative)
 Outputs
 ---------------------
 Writes to:
-  <paper>/outputs/figures/fig03_cdc_goodness_grid_cases1to4.(png|pdf|svg)
-  <paper>/outputs/figures/fig05_cdc_goodness_grid_cases5to7.(png|pdf|svg)
+  <repo>/05_Final_Manuscript_Figures/f04.(png|pdf|svg)
+  <repo>/05_Final_Manuscript_Figures/f06.(png|pdf|svg)
 
 Run
 ---
-  python scripts/figures/fig03_fig05_cdc_goodness_grids.py --ks-dir /path/to/ks_diagnostics --save
+  python scripts/figures/fig04_fig06_cdc_goodness_grids.py --ks-dir /path/to/ks_diagnostics --save
 
 """
 
@@ -46,6 +47,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.lines import Line2D
 from matplotlib.patches import Polygon, Patch
+from matplotlib.ticker import MultipleLocator
 from scipy.signal import find_peaks
 
 
@@ -53,25 +55,48 @@ from scipy.signal import find_peaks
 mpl.rcParams.update(
     {
         "font.family": "serif",
-        "font.size": 10,
+        "font.size": 11,
         "mathtext.fontset": "stix",
-        "axes.labelsize": 10,
+        "axes.labelsize": 11,
         "axes.titlesize": 11,
         "axes.linewidth": 0.8,
         "xtick.direction": "in",
         "ytick.direction": "in",
         "xtick.major.size": 4,
         "ytick.major.size": 4,
-        "legend.fontsize": 8,
+        "legend.fontsize": 9,
         "lines.linewidth": 1.2,
         "savefig.dpi": 300,
         "pdf.fonttype": 42,
         "ps.fonttype": 42,
+        "svg.fonttype": "none",
     }
 )
 
 ORANGE = "#d95f02"  # median-curve peaks (illustrative)
 GREEN = "#1b9e77"   # ensemble-catalogue overlay (triangles, if used)
+
+# ── colourblind-safe palette ──────────────────────────────────────────────────
+TRUE_AGE_CLR = "#888888"        # grey dashed verticals for synthetic truth
+CI_BAND_CLR  = "#56B4E9"       # Okabe-Ito sky blue – CI band (chromatic vs grey envelope)
+CI_BAND_ALPHA = 0.30            # visible but not overwhelming
+LABEL_CLR = "k"                 # black text labels
+LABEL_BBOX = dict(boxstyle="round,pad=0.15", facecolor="white",
+                  edgecolor="none", alpha=0.75)
+PANEL_LABEL_BBOX = dict(boxstyle="round,pad=0.12", facecolor="white",
+                        edgecolor="none", alpha=0.75)
+FIGURE_WIDTH = 7.2
+PANEL_HEIGHT = 1.95
+GRID_WSPACE = 0.14
+GRID_HSPACE = 0.10
+TICK_LABEL_SIZE = 8.5
+TITLE_SIZE = 11
+CASE_LABEL_SIZE = 10
+PANEL_LABEL_SIZE = 10
+AGE_LABEL_SIZE = 8
+MAJOR_X_TICK = 500
+MINOR_X_TICK = 250
+MAJOR_Y_TICK = 0.2
 
 
 # ── truth & layout ───────────────────────────────────────────────────────────
@@ -98,6 +123,10 @@ def _default_paper_dir() -> Path:
         if (parent / "data").is_dir() and (parent / "scripts").is_dir():
             return parent
     return cand
+
+
+def _default_output_dir() -> Path:
+    return _default_paper_dir() / "05_Final_Manuscript_Figures"
 
 
 def _discover_tags(ks_dir: Path) -> List[str]:
@@ -137,33 +166,70 @@ def _tri_down_on_line(
     ax.add_patch(tri)
 
 
-def draw_catalogue_bands(ax, entries, *, label_peaks=True, alpha=0.2):
+def draw_catalogue_bands(ax, entries, *, label_peaks=True, alpha=0.15):
     """Draw vertical shaded bands for catalogue 95% CI intervals."""
     for e in entries:
         lo = float(e["lo"])
         hi = float(e["hi"])
         age = float(e["age"])
 
-        ax.axvspan(lo, hi, ymin=0.0, ymax=1.0, facecolor="skyblue", alpha=alpha, edgecolor="none", zorder=0)
+        # shaded CI band (sky blue) + thin black vertical line (different hues)
+        ax.axvspan(lo, hi, ymin=0.0, ymax=1.0, facecolor=CI_BAND_CLR,
+                   alpha=CI_BAND_ALPHA, edgecolor="none", zorder=0)
+        ax.axvline(age, ls="-", lw=0.6, color="k", alpha=0.50, zorder=2.5)
 
         if label_peaks and e.get("_label", True):
             ax.text(
                 age,
-                1.02,
-                f"{age:.0f} Ma",
+                0.95,
+                f"{age:.0f}",
                 transform=ax.get_xaxis_transform(),
                 ha="center",
-                va="bottom",
-                fontsize=7,
-                color="k",
-                clip_on=False,
-                zorder=5,
+                va="top",
+                fontsize=AGE_LABEL_SIZE,
+                color=LABEL_CLR,
+                bbox=LABEL_BBOX,
+                clip_on=True,
+                zorder=7,
             )
 
 
 def _grid_step(x):
     dif = np.diff(np.asarray(x, float))
     return float(np.median(dif)) if dif.size else 10.0
+
+
+def _panel_label(index: int) -> str:
+    return f"{chr(ord('a') + index)})"
+
+
+def _format_axes(ax, *, show_xlabels: bool, show_ylabels: bool) -> None:
+    ax.set_xlim(0, 2000)
+    ax.xaxis.set_major_locator(MultipleLocator(MAJOR_X_TICK))
+    ax.xaxis.set_minor_locator(MultipleLocator(MINOR_X_TICK))
+    ax.yaxis.set_major_locator(MultipleLocator(MAJOR_Y_TICK))
+    ax.tick_params(
+        direction="in",
+        labelsize=TICK_LABEL_SIZE,
+        pad=2,
+        labelbottom=show_xlabels,
+        labelleft=show_ylabels,
+    )
+
+
+def _add_panel_label(ax, index: int) -> None:
+    ax.text(
+        0.03,
+        0.97,
+        _panel_label(index),
+        transform=ax.transAxes,
+        ha="left",
+        va="top",
+        fontsize=PANEL_LABEL_SIZE,
+        fontweight="bold",
+        bbox=PANEL_LABEL_BBOX,
+        zorder=8,
+    )
 
 
 def support_pct(raw, n_runs=None):
@@ -321,7 +387,7 @@ def draw_catalogue_above(ax, entries, n_runs, step, y_base=1.035, dy=0.055):
     for i, e in enumerate(entries):
         y = y_base + i * dy
         # CI bar
-        ax.plot([e["lo"], e["hi"]], [y, y], color="skyblue", lw=1.6, zorder=5, clip_on=False)
+        ax.plot([e["lo"], e["hi"]], [y, y], color="#56B4E9", lw=1.6, zorder=5, clip_on=False)
         # triangle whose tip sits on the CI bar
         _tri_down_on_line(ax, e["age"], y, step=step, facecolor=GREEN, edgecolor="k", linewidth=0.5, zorder=6)
         # optional support label
@@ -334,8 +400,9 @@ def draw_catalogue_above(ax, entries, n_runs, step, y_base=1.035, dy=0.055):
                 label,
                 ha="center",
                 va="bottom",
-                fontsize=7,
-                color="k",
+                fontsize=AGE_LABEL_SIZE,
+                color=LABEL_CLR,
+                bbox=LABEL_BBOX,
                 zorder=7,
                 clip_on=False,
             )
@@ -455,10 +522,10 @@ def load_npz_both(sample_tag: str, ks_dir: Path):
 
 def _legend_handles(include_median_peaks=True):
     handles = [
-        Line2D([0], [0], color="0.75", lw=1.2, label="all runs $S(t)$"),
-        Line2D([0], [0], color="k", lw=1.5, label="median $S(t)$"),
-        Line2D([0], [0], color="0.6", lw=0.6, ls="--", label="true age"),
-        Patch(facecolor="skyblue", alpha=0.18, edgecolor="none", label="95% CI band"),
+        Patch(facecolor="0.85", alpha=0.50, edgecolor="none", label="95% envelope"),
+        Line2D([0], [0], color="k", lw=1.5, label=r"median $S(t)$"),
+        Line2D([0], [0], color=TRUE_AGE_CLR, lw=1.0, ls="--", label="true age"),
+        Line2D([0], [0], color="k", lw=0.6, alpha=0.50, label="reported age"),
     ]
     if include_median_peaks:
         handles.insert(
@@ -507,10 +574,10 @@ def make_grid(
     fig, axes = plt.subplots(
         n_row,
         n_col,
-        figsize=(7.5, 3.0 * n_row),
+        figsize=(FIGURE_WIDTH, 0.55 + PANEL_HEIGHT * n_row),
         sharex=True,
         sharey=True,
-        gridspec_kw={"wspace": 0.16, "hspace": 0.08},
+        gridspec_kw={"wspace": GRID_WSPACE, "hspace": GRID_HSPACE},
     )
 
     # Ensure 2D axes
@@ -527,16 +594,18 @@ def make_grid(
     for r, case in enumerate(cases):
         for c, tier in enumerate(TIERS):
             ax = axes[r, c]
+            panel_index = r * n_col + c
             tag = f"{case}{tier}".upper()
 
             try:
                 x, S_raw, S_pen = load_npz_both(tag, ks_dir)
             except FileNotFoundError:
-                ax.set_xlim(0, 2000)
                 ax.set_ylim(0, 1)
-                ax.set_title(f"Tier {tier} (no NPZ for {tag})", color="crimson", fontsize=9)
+                _format_axes(ax, show_xlabels=(r == n_row - 1), show_ylabels=(c == 0))
+                _add_panel_label(ax, panel_index)
+                ax.set_title(f"Tier {tier} (no NPZ for {tag})", color="0.4", fontsize=TICK_LABEL_SIZE)
                 for age in TRUE.get(case, []):
-                    ax.axvline(age, ls="--", lw=0.8, color="0.6", zorder=0)
+                    ax.axvline(age, ls="--", lw=1.0, color=TRUE_AGE_CLR, zorder=3)
                 ax.axis("on")
                 continue
 
@@ -550,16 +619,18 @@ def make_grid(
                 if pk.size:
                     ax.plot(x[pk], y_med[pk], "o", ms=4, mfc=ORANGE, mec=ORANGE, lw=0, zorder=3)
                     for j in pk:
-                        ax.text(x[j], y_med[j] + 0.02, f"{x[j]:.0f}", ha="center", va="bottom", fontsize=7, color=ORANGE)
+                        ax.text(x[j], y_med[j] + 0.02, f"{x[j]:.0f}", ha="center", va="bottom", fontsize=AGE_LABEL_SIZE, color=ORANGE)
 
-            # curves
-            for y in boot_curve:
-                ax.plot(x, y, color="0.75", lw=0.4, alpha=0.6, zorder=1)
-            ax.plot(x, y_med, color="k", lw=1.5, zorder=2)
+            # 2.5–97.5 percentile envelope + median
+            y_lo = np.nanpercentile(boot_curve, 2.5, axis=0)
+            y_hi = np.nanpercentile(boot_curve, 97.5, axis=0)
+            ax.fill_between(x, y_lo, y_hi, color="0.85", alpha=0.50,
+                            edgecolor="none", zorder=1, label="95% envelope")
+            ax.plot(x, y_med, color="k", lw=1.5, zorder=4)
 
-            # truth
+            # truth (grey dashed — visible above envelope)
             for age in TRUE.get(case, []):
-                ax.axvline(age, ls="--", lw=1, color="crimson", zorder=0)
+                ax.axvline(age, ls="--", lw=1.0, color=TRUE_AGE_CLR, zorder=3)
 
             # overlay from catalogue (penalised by default)
             entries_raw = catalogue_map.get(_norm_tag(tag), [])
@@ -583,19 +654,18 @@ def make_grid(
             else:
                 draw_catalogue_bands(ax, entries, label_peaks=True)
 
-            ax.set_xlim(0, 2000)
-
             show_xlabels = r == n_row - 1
             show_ylabels = c == 0
-            ax.tick_params(direction="in", labelsize=7, pad=2, labelbottom=show_xlabels, labelleft=show_ylabels)
+            _format_axes(ax, show_xlabels=show_xlabels, show_ylabels=show_ylabels)
+            _add_panel_label(ax, panel_index)
 
             if r == 0:
-                ax.set_title(f"Tier {tier}", fontweight="bold")
+                ax.set_title(f"Tier {tier}", fontsize=TITLE_SIZE, fontweight="bold")
             if c == n_col - 1:
-                ax.text(1.04, 0.5, f"Case {case}", transform=ax.transAxes, rotation=-90, va="center", ha="left", fontsize=9, fontweight="bold")
+                ax.text(1.03, 0.5, f"Case {case}", transform=ax.transAxes, rotation=-90, va="center", ha="left", fontsize=CASE_LABEL_SIZE, fontweight="bold")
 
-    axes[-1, n_col // 2].set_xlabel("Pb-loss age (Ma)", fontsize=9)
-    axes[n_row // 2, 0].set_ylabel(r"Normalised goodness, $S$", fontsize=9)
+    axes[-1, n_col // 2].set_xlabel("Pb-loss age (Ma)", fontsize=11)
+    axes[n_row // 2, 0].set_ylabel(r"Normalised goodness-of-fit, $S(t)$", fontsize=11)
 
     if any_overlay:
         if overlay_mode == "above":
@@ -620,13 +690,13 @@ def make_grid(
         fig.legend(
             handles=_legend_handles(include_median_peaks=show_median_peaks),
             loc="upper center",
-            ncol=6,
+            ncol=4,
             frameon=False,
-            bbox_to_anchor=(0.5, 1.00),
-            borderaxespad=0.6,
+            bbox_to_anchor=(0.5, 0.995),
+            borderaxespad=0.3,
         )
 
-    fig.tight_layout(rect=[0.07, 0.06, 1.0, 0.96])
+    fig.subplots_adjust(left=0.08, right=0.97, bottom=0.09, top=0.93, wspace=GRID_WSPACE, hspace=GRID_HSPACE)
 
     if save:
         save_figure(fig, outdir, outfile_stub, formats)
@@ -638,16 +708,17 @@ def make_grid(
 
 def _parse_args() -> argparse.Namespace:
     paper_dir = _default_paper_dir()
+    output_dir = _default_output_dir()
     default_catalogue = paper_dir / "data" / "derived" / "ensemble_catalogue.csv"
 
     default_ks_dir = paper_dir / "data" / "derived" / "ks_diagnostics"
 
-    ap = argparse.ArgumentParser(description="CDC goodness-surface grids with catalogue overlay (Figures 3 & 5).")
+    ap = argparse.ArgumentParser(description="CDC goodness-surface grids with catalogue overlay (final manuscript Figures 4 & 6).")
 
     ap.add_argument("--paper-dir", type=Path, default=paper_dir, help="Paper/repo root directory.")
     ap.add_argument("--ks-dir", type=Path, default=default_ks_dir, help="Directory containing per-run NPZ surfaces.")
     ap.add_argument("--catalogue-csv", type=Path, default=default_catalogue, help="Ensemble catalogue CSV.")
-    ap.add_argument("--fig-dir", type=Path, default=(paper_dir / "outputs" / "figures"), help="Output directory for figures.")
+    ap.add_argument("--fig-dir", type=Path, default=output_dir, help="Output directory for figures.")
     ap.add_argument("--curve-surface", type=str, default="pen", choices=["pen", "raw"], help="Which surface to plot as curves.")
     ap.add_argument("--triangle-surface", type=str, default=None, choices=["pen", "raw"], help="Which catalogue to use (default: same as curve-surface).")
 
@@ -682,14 +753,14 @@ def main() -> None:
 
     catalogue_map = load_catalogue_table(catalogue_csv)
 
-    # Fig03 (Cases 1–4)
+    # Figure 4 (Cases 1–4)
     make_grid(
         cases=CASES_1_TO_4,
         ks_dir=ks_dir,
         curve_surface=curve_surface,
         triangle_surface=triangle_surface,
         title="CDC goodness surfaces with ensemble catalogue — Cases 1–4 × Tiers A–C",
-        outfile_stub="fig03_cdc_goodness_grid_cases1to4",
+        outfile_stub="f04",
         catalogue_map=catalogue_map,
         outdir=fig_dir,
         formats=formats,
@@ -701,14 +772,14 @@ def main() -> None:
         show = not args.no_show,
     )
 
-    # Fig05 (Cases 5–7)
+    # Figure 6 (Cases 5–7)
     make_grid(
         cases=CASES_5_TO_7,
         ks_dir=ks_dir,
         curve_surface=curve_surface,
         triangle_surface=triangle_surface,
         title="CDC goodness surfaces with ensemble catalogue — Cases 5–7 × Tiers A–C",
-        outfile_stub="fig05_cdc_goodness_grid_cases5to7",
+        outfile_stub="f06",
         catalogue_map=catalogue_map,
         outdir=fig_dir,
         formats=formats,
