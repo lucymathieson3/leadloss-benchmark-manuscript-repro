@@ -5,8 +5,11 @@
    viewBox="0 0 508.282 196.484422"
    version="1.1"
    id="svg6746"
-   sodipodi:docname="Case8_Revised_Combined.svg"
+   sodipodi:docname="f08.svg"
    inkscape:version="1.2 (dc2aeda, 2022-05-15)"
+   inkscape:export-filename="f08.pdf"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,13 +29,13 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="pt"
      showgrid="false"
-     inkscape:zoom="1.0575694"
-     inkscape:cx="310.6179"
-     inkscape:cy="202.82356"
+     inkscape:zoom="0.95618771"
+     inkscape:cx="371.26602"
+     inkscape:cy="156.35005"
      inkscape:window-width="1668"
      inkscape:window-height="769"
-     inkscape:window-x="0"
-     inkscape:window-y="30"
+     inkscape:window-x="2008"
+     inkscape:window-y="408"
      inkscape:window-maximized="0"
      inkscape:current-layer="figure_1" />
   <metadata
@@ -4771,19 +4774,7 @@
            id="tspan8425"
            x="57.823006"
            y="27.0919"
-           style="stroke-width:0.6"></tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:11.1662px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica Neue, Helvetica, Arial, sans-serif, Normal';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.70098;stroke-width:0.6"
-         x="35.607483"
-         y="13.853586"
-         id="text8431"
-         transform="scale(0.99443357,1.0055976)"><tspan
-           sodipodi:role="line"
-           id="tspan8429"
-           x="35.607483"
-           y="13.853586"
-           style="fill:#000000;stroke-width:0.6">a)</tspan></text>
+           style="stroke-width:0.6" /></text>
     </g>
     <g
        id="axes_2">
@@ -7479,16 +7470,26 @@
     </g>
     <text
        xml:space="preserve"
-       style="font-size:11.1662px;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;-inkscape-font-specification:'Helvetica Neue, Helvetica, Arial, sans-serif, Normal';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:0.70098;stroke-width:0.6;stroke-linecap:butt;stroke-linejoin:round"
-       x="303.5972"
-       y="13.666684"
-       id="text8431-0"
-       transform="scale(0.99443356,1.0055976)"><tspan
+       style="font-size:12px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.6"
+       x="38.32856"
+       y="15.847383"
+       id="text2165"><tspan
          sodipodi:role="line"
-         id="tspan8429-3"
-         x="303.5972"
-         y="13.666684"
-         style="fill:#000000;stroke-width:0.6">b)</tspan></text>
+         id="tspan2163"
+         x="38.32856"
+         y="15.847383"
+         style="fill:#000000;fill-opacity:1;stroke-width:0.6">(a)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.6"
+       x="304.78574"
+       y="15.110297"
+       id="text3034"><tspan
+         sodipodi:role="line"
+         id="tspan3032"
+         style="stroke-width:0.6"
+         x="304.78574"
+         y="15.110297">(b)</tspan></text>
   </g>
   <defs
      id="defs6744">

@@ -29,13 +29,13 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="pt"
      showgrid="true"
-     inkscape:zoom="0.46004349"
-     inkscape:cx="846.65909"
-     inkscape:cy="654.28597"
+     inkscape:zoom="0.64955983"
+     inkscape:cx="456.46295"
+     inkscape:cy="581.93253"
      inkscape:window-width="1481"
      inkscape:window-height="958"
-     inkscape:window-x="2144"
-     inkscape:window-y="368"
+     inkscape:window-x="2167"
+     inkscape:window-y="314"
      inkscape:window-maximized="0"
      inkscape:current-layer="figure_1">
     <inkscape:grid
@@ -119,11 +119,17 @@
        transform="scale(0.015625)" />
   </defs>
   <g
-     id="figure_1">
+     id="figure_1"
+     inkscape:export-filename="f02.pdf"
+     inkscape:export-xdpi="300"
+     inkscape:export-ydpi="300">
     <g
        id="axes_1"
        transform="matrix(1.2304884,0,0,1.2304884,-36.512612,-17.470078)"
-       style="stroke-width:0.812686">
+       style="stroke-width:0.812686"
+       inkscape:export-filename="f02.pdf"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300">
       <g
          id="patch_2"
          style="stroke-width:0.812686">
@@ -10194,7 +10200,7 @@
          id="tspan72894-7"
          x="233.19078"
          y="93.299133"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.600001">b)</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.600001">(b)</tspan></text>
     <g
        id="axes_3"
        transform="matrix(1.2304884,0,0,1.2304884,-36.512612,-17.470078)"
@@ -59594,7 +59600,7 @@
          id="tspan72894"
          x="58.567608"
          y="92.656418"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.600001">a)</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.600001">(a)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59605,7 +59611,7 @@
          id="tspan72938"
          style="stroke-width:0.600001"
          x="405.49542"
-         y="93.388405">c)</tspan></text>
+         y="93.388405">(c)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59616,7 +59622,7 @@
          id="tspan72942"
          style="stroke-width:0.600001"
          x="57.948795"
-         y="248.09125">d)</tspan></text>
+         y="248.09125">(d)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59627,7 +59633,7 @@
          id="tspan72946"
          style="stroke-width:0.600001"
          x="231.54384"
-         y="247.37833">e)</tspan></text>
+         y="247.37833">(e)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59638,7 +59644,7 @@
          id="tspan72950"
          style="stroke-width:0.600001"
          x="405.85187"
-         y="249.1606">f)</tspan></text>
+         y="249.1606">(f)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59649,7 +59655,7 @@
          id="tspan72954"
          style="stroke-width:0.600001"
          x="60.087509"
-         y="402.43765">g)</tspan></text>
+         y="402.43765">(g)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59660,7 +59666,7 @@
          id="tspan72958"
          style="stroke-width:0.600001"
          x="234.03905"
-         y="403.15057">h)</tspan></text>
+         y="403.15057">(h)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59671,7 +59677,7 @@
          id="tspan72962"
          style="stroke-width:0.600001"
          x="405.13898"
-         y="402.79407">i)</tspan></text>
+         y="402.79407">(i)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59682,7 +59688,7 @@
          id="tspan72966"
          style="stroke-width:0.600001"
          x="59.018181"
-         y="556.07104">j)</tspan></text>
+         y="556.07104">(j)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59693,7 +59699,7 @@
          id="tspan72970"
          style="stroke-width:0.600001"
          x="232.61322"
-         y="557.14044">k)</tspan></text>
+         y="557.14044">(k)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.2268px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#333333;stroke-width:0.600001"
@@ -59704,7 +59710,18 @@
          id="tspan72974"
          style="stroke-width:0.600001"
          x="405.49542"
-         y="558.20978">l)</tspan></text>
+         y="558.20978">(l)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Normal';text-align:center;text-anchor:middle;fill:#000000;stroke-width:0.6"
+       x="398.59436"
+       y="397.27454"
+       id="text21936"><tspan
+         sodipodi:role="line"
+         id="tspan21934"
+         x="398.59436"
+         y="397.27454"
+         style="stroke-width:0.6"></tspan></text>
   </g>
   <text
      xml:space="preserve"
@@ -59761,16 +59778,19 @@
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.3048px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;stroke:none;stroke-width:1.50975;stroke-linecap:butt;stroke-linejoin:round"
-     x="67.036324"
-     y="620.03473"
+     x="68.910233"
+     y="619.76703"
      id="text78475-00-2-0-8-3"
      inkscape:transform-center-x="36.828952"
-     inkscape:transform-center-y="15.753398"><tspan
+     inkscape:transform-center-y="15.753398"
+     inkscape:export-filename="f02.pdf"
+     inkscape:export-xdpi="300"
+     inkscape:export-ydpi="300"><tspan
        sodipodi:role="line"
        id="tspan78473-1-9-3-7-7"
        style="stroke-width:1.50975"
-       x="67.036324"
-       y="620.03473">800 Ma</tspan></text>
+       x="68.910233"
+       y="619.76703">1800 Ma</tspan></text>
   <text
      xml:space="preserve"
      style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.3048px;font-family:'STIX Two Text';-inkscape-font-specification:'STIX Two Text, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:#000000;stroke:none;stroke-width:1.50975;stroke-linecap:butt;stroke-linejoin:round"
