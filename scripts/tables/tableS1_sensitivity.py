@@ -130,7 +130,7 @@ SWEEPS: Dict[str, Tuple[str, List[float]]] = {
     # feature that is off by design rather than a tuning choice.
 }
 
-# ── Truth-window scoring (matches manuscript Tables 3–8 logic) ────────
+# ── Truth-window scoring used for manuscript benchmark assignment metrics ──
 HALF_MIN = 50.0
 HALF_CAP = 120.0
 

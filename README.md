@@ -26,7 +26,7 @@ Original per-panel DD input files (`1a.csv` to `7c.csv`) are kept separately in:
 
 - `data/inputs/synthetic_cases1to7/per_case_dd_inputs_original_format/`
 
-These are the case-by-case input files used by the discordance dating (DD) R workflow (Reimink et al., 2015;2025).
+These are the case-by-case input files used by the discordance-dating (DD) R workflow described by Reimink et al. (2016, 2025).
 The combined `synthetic_*_DD.csv` files combine the same DD inputs for
 multiple panels into single tables.
 
@@ -56,3 +56,5 @@ Regenerated outputs are written to:
 
 The rerun does not overwrite the final manuscript figures or the workbook files
 listed above.
+Table S1 is not fully rerunnable from this archive alone; `scripts/run_all.py`
+skips it unless the LeadLoss source is available.

@@ -7,7 +7,7 @@ Three-panel case-study figure tying the CDC ensemble result for sample
 constraints.
 
   Panel A  CDC ensemble goodness-of-fit curve for 193435: Monte-Carlo
-           "spaghetti" realisations + the ensemble mean. Two accepted
+           realisations + the ensemble median. Two accepted
            peaks are annotated with their CIs ("stability bounds") and
            direct/winner support fractions from the peak-picker.
 
@@ -19,9 +19,8 @@ constraints.
            plot off-scale above 1400 Ma and are noted.
 
   Panel C  Regional Western Australia + central Australia *Pb-loss-
-           relevant* events for 0–1400 Ma, from Lucy's
-           WA_geochron_context_master compilation (GSWA + Geoscience
-           Australia). Only the two classes of event that most directly
+           relevant* events for 0–1400 Ma, compiled from GSWA +
+           Geoscience Australia sources. Only the two classes of event that most directly
            drive U–Pb Pb-loss in zircon are shown:
              - Thermal / cooling (Ar–Ar, Rb–Sr, K–Ar) — records the
                times at which the host rocks cooled through closure
@@ -42,8 +41,8 @@ bounds from Panel A (444–484 Ma light blue; 826–1255 Ma light orange).
 
 Inputs:
   papers/2025-peak-picking/data/raw/185138_spot_ages.csv
-  Desktop/Yilgarn_plot_workflow/data_to_plot/raw/
-      WA_geochron_context_master.csv
+  data/inputs/case_study_193435/machine_readable_csv/
+      regional_cooling_ages.csv
   papers/2025-peak-picking/data/derived/193435_cdc_2026-04-20/
       193435_curve.csv, 193435_spaghetti.csv
 
@@ -121,8 +120,8 @@ BAND_ALPHA = 0.28
 
 def apply_style():
     # Latin Modern Roman — the LaTeX book serif — gives a distinctly
-    # "typeset paper" feel and avoids the matplotlib DejaVu Serif look
-    # that most AI-generated figures default to. Math is rendered in
+    # "typeset paper" feel and avoids the default matplotlib serif look.
+    # Math is rendered in
     # the matching Computer Modern / LM Math set via mathtext.
     rcParams["font.family"] = "serif"
     rcParams["font.serif"] = [
@@ -434,7 +433,7 @@ def panel_cdc(ax, curve_x, curve_y, spag_x, spag_runs, *, max_spaghetti=200):
         mc_handle = None
 
     ax.plot(curve_x, curve_y, color=INK, lw=1.3, zorder=4,
-            label="Ensemble mean")
+            label="Ensemble median")
 
     curve_ymax = float(np.nanmax(curve_y)) if curve_y.size else 1.0
     curve_ymin = float(np.nanmin(curve_y)) if curve_y.size else 0.0
@@ -475,7 +474,7 @@ def panel_cdc(ax, curve_x, curve_y, spag_x, spag_runs, *, max_spaghetti=200):
         loc="left", fontsize=8.5, pad=3,
     )
 
-    handles = [Line2D([0], [0], color=INK, lw=1.3, label="Ensemble mean")]
+    handles = [Line2D([0], [0], color=INK, lw=1.3, label="Ensemble median")]
     if mc_handle is not None:
         handles.append(mc_handle)
     # Peak labels read from 193435_peaks.csv so legend stays in sync with data.
@@ -938,8 +937,8 @@ def panel_regional_pdp(ax, regional: pd.DataFrame, x: np.ndarray,
         loc="left", fontsize=8.5, pad=3,
     )
     # Data-source footer: identifies the compilation and filter criteria
-    # so the provenance is on-figure for the reader.  Full provenance
-    # (per-record source, filter rules, record counts) is documented in
+    # directly on the figure. Full source details
+    # (per-record source, filter rules, record counts) are documented in
     # papers/2025-peak-picking/data/raw/README_panel_c_data.md.  Placed
     # below the x-axis label so it reads as a footnote, not plot content.
     ax.text(

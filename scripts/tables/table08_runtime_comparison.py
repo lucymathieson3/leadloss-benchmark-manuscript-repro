@@ -1,21 +1,15 @@
 #!/usr/bin/env python3
-"""tables_10_12_runtime_tables.py
+"""table08_runtime_comparison.py
 
-Generate manuscript **Tables 9–11** (runtime tables) from the runtime logs
-shipped with the repository.
+Generate manuscript Table 8 from the CDC and DD runtime logs shipped
+with this repository.
 
-Tables
+Inputs
 ------
-- Table 9: CDC runtime by tier (R=200; ngrid=200)
-- Table 10: DD runtime by tier (nboot=200)
-- Table 11: Runtime comparison between CDC and DD (Speedup = DD/CDC)
-
-Inputs (defaults)
------------------
 Expected in:
-  <paper>/data/derived/
-    ensemble_v2_anchor_noclust_curvature_ci_sigma1_1to2000_nodes200_mc200_final_4435064/runtime_log.csv
-    reimink_discordance_dating/runtime_log_reimink.csv
+  <paper>/data/derived/runtime_provenance/raw_logs/
+    cdc_runtime_log_cases1to7_plus_case8.csv
+    dd_runtime_log_reimink.csv
 
 You may override those locations via CLI flags:
   --cdc-log PATH
@@ -25,14 +19,15 @@ Outputs
 -------
 Writes into:
   <paper>/outputs/tables/
-    table8_runtime_comparison.csv/.tex
+    table8_runtime_comparison.csv
+    table8_runtime_comparison.tex
 
 Dependencies
 ------------
 - pandas
 - numpy
 
-Author: Lucy Mathieson 
+Author: Lucy Mathieson
 Date: 29/12/2025
 """
 
@@ -105,7 +100,7 @@ def _extract_case_from_sample(sample: pd.Series) -> pd.Series:
 
 
 def summarise_cdc_runtime(df: pd.DataFrame, *, r_default: int = 200) -> pd.DataFrame:
-    """Return a Table-9-like dataframe from a CDC runtime log."""
+    """Return a Table 8-style dataframe from a CDC runtime log."""
     if "method" not in df.columns or "phase" not in df.columns:
         raise ValueError("CDC runtime log must contain 'method' and 'phase' columns.")
 
@@ -125,7 +120,7 @@ def summarise_cdc_runtime(df: pd.DataFrame, *, r_default: int = 200) -> pd.DataF
         # treat all CDC rows as E2E.
         e2e = d[d["method"] == "CDC"].copy()
 
-    # Manuscript Tables 10–12 report Cases 1–7 only; Case 8 is a faster
+    # Manuscript Table 8 reports Cases 1–7 only; Case 8 is a faster
     # abstention-only boundary case and is excluded from runtime summaries.
     if "case" in e2e.columns:
         e2e = e2e[e2e["case"] != "8"].copy()
@@ -160,7 +155,7 @@ def summarise_cdc_runtime(df: pd.DataFrame, *, r_default: int = 200) -> pd.DataF
 
 
 def summarise_dd_runtime(df: pd.DataFrame, *, nboot_default: int = 200) -> pd.DataFrame:
-    """Return a Table-11-like dataframe from a DD runtime log.
+    """Return a Table 8-style dataframe from a DD runtime log.
 
     Supports two common shapes:
       1) One row per run with an elapsed-time column and a tier.
@@ -328,7 +323,7 @@ def latex_table12(df: pd.DataFrame) -> str:
 def main(argv: Optional[list[str]] = None) -> None:
     base = parse_paper_args(__file__)
 
-    ap = argparse.ArgumentParser(description="Generate manuscript Tables 10–12 (runtime tables).")
+    ap = argparse.ArgumentParser(description="Generate manuscript Table 8 runtime comparison.")
     ap.add_argument("--cdc-log", type=str, default=None, help="Path to CDC runtime log CSV (optional).")
     ap.add_argument("--dd-log", type=str, default=None, help="Path to DD runtime log CSV (optional).")
     ap.add_argument("--out-subdir", type=str, default="tables", help="Output subdirectory under papers/2025-peak-picking/outputs/.")

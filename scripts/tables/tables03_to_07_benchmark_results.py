@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""tables03_to_08_benchmark_results.py
+"""tables03_to_07_benchmark_results.py
 
-Reproduce manuscript benchmark Tables 3–8 from existing CDC and Reimink/DD outputs.
+Reproduce manuscript benchmark Tables 3–7 from existing CDC and Reimink/DD outputs.
 
 This script is designed to run "as-is" from within the paper repository, with all
 inputs located under the paper's /data/derived/ folder.
@@ -53,8 +53,8 @@ DD–PEAKS (event-wise):
     - CI = 95% equal-tailed if assigned size >= 5, else fallbacks (matches old script)
     - support = assigned / total_boot (reported as percent in outputs)
 
-Tables 3–6 use event-level rows; Table 7 uses dataset-level recovery metrics; Table 8 reports
-median interval widths.
+Tables 3–5 report per-event accuracy summaries, Table 6 reports event recovery by tier, and
+Table 7 reports median interval widths.
 
 CLI flags (optional)
 --------------------
@@ -851,26 +851,7 @@ def main() -> None:
         out_dir / "table3_aggregate_per_event_formatted.tex",
     )
 
-    # ---------------- Table 4: age bands ----------------
-    df_band = df.copy()
-    df_band["age_band"] = np.where(df_band["true_age"] < 1000.0, "<1 Ga", ">=1 Ga")
-    t4 = summarise(df_band, ["age_band", "method"])
-    t4 = t4[["age_band", "method", "n_true", "n_assigned", "median_bias", "mae", "coverage"]]
-    t4 = t4.sort_values(["age_band", "method"])
-
-    t4_fmt = t4.copy()
-    t4_fmt["n_true"] = t4_fmt["n_true"].astype(int).astype(str)
-    t4_fmt["n_assigned"] = t4_fmt["n_assigned"].astype(int).astype(str)
-    t4_fmt["median_bias"] = t4_fmt["median_bias"].map(format_bias)
-    t4_fmt["mae"] = t4_fmt["mae"].map(format_int_or_blank)
-    t4_fmt["coverage"] = t4_fmt["coverage"].map(format_int_or_blank)
-
-    write_csv_and_tex(t4, out_dir / "table4_age_bands.csv", out_dir / "table4_age_bands.tex")
-    write_csv_and_tex(
-        t4_fmt, out_dir / "table4_age_bands_formatted.csv", out_dir / "table4_age_bands_formatted.tex"
-    )
-
-    # ---------------- Table 5: single-stage (Cases 1–4) -------------------
+    # ---------------- Table 4: single-stage (Cases 1–4) -------------------
     df5 = df[df["case"].isin(["1", "2", "3", "4"])].copy()
 
     t5 = summarise(df5, ["tier", "method"])
@@ -889,7 +870,7 @@ def main() -> None:
         out_dir / "table4_single_stage_by_tier_formatted.tex",
     )
 
-    # ---------------- Table 6: two-stage benchmarks (Cases 5–7) -----------
+    # ---------------- Table 5: two-stage benchmarks (Cases 5–7) -----------
     df6 = df[df["case"].isin(["5", "6", "7"])].copy()
 
     t6 = summarise(df6, ["tier", "method"])
@@ -914,7 +895,7 @@ def main() -> None:
         out_dir / "table5_two_stage_by_tier_formatted.tex",
     )
 
-    # ---------------- Table 7: dataset-level recovery ---------------------
+    # ---------------- Table 6: dataset-level recovery ---------------------
     rows7 = []
     for tier in TIERS:
         ds_tier = [(case, tier, truths) for case, truths in CASES_TRUE.items()]
@@ -952,7 +933,7 @@ def main() -> None:
         out_dir / "table6_event_recovery_by_tier_formatted.tex",
     )
 
-    # ---------------- Table 8: 95% interval widths (by tier) --------------
+    # ---------------- Table 7: 95% interval widths (by tier) --------------
     dfw = df.copy()
     dfw = dfw[dfw["age_med"].notna()].copy()
     dfw = dfw[np.isfinite(dfw["width"])].copy()
@@ -984,7 +965,6 @@ def main() -> None:
     print(f"\nWrote tables into: {out_dir}")
     print("Key outputs:")
     print("  table3_aggregate_per_event_formatted.tex")
-    print("  table4_age_bands_formatted.tex")
     print("  table4_single_stage_by_tier_formatted.tex")
     print("  table5_two_stage_by_tier_formatted.tex")
     print("  table6_event_recovery_by_tier_formatted.tex")

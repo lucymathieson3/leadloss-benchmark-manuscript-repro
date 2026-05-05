@@ -2,7 +2,7 @@
 """
 Synthetic U–Pb generator that draws DISCORDANT arrays natively in
 Tera–Wasserburg (TW) space, then converts to Wetherill for filtering
-and for the second app.
+and for the DD workflow.
 - Exports: Wetherill-style raw, Reimink-style, and TW CSV.
 """
 
