@@ -152,6 +152,7 @@ def main() -> int:
         [py, fig / "fig09_cdc_upgrade.py",
          "--sample-id", args.upgrade_sample_id, "--no-show", "--fig-dir", fig_dir],
         [py, fig / "fig10_case_study_193435.py", "--outdir", fig_dir],
+        [py, fig / "figS1_concordia_193435.py", "--outdir", fig_dir, "--stub", "figS1_concordia_193435"],
     ]
 
     for cmd in table_cmds:
